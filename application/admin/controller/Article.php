@@ -1,9 +1,9 @@
 <?php
 namespace app\admin\controller;
 
-use think\Controller;
+use app\admin\controller\Common;
 
-class Article extends Controller
+class Article extends Common
 {
     public function index()
     {
