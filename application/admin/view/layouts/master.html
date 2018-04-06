@@ -119,17 +119,17 @@
                     </li>
                     <li class="dropdown navbar-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{ asset(!empty(session('adminDetail.headimg')) ? session('adminDetail.headimg') : 'asset_admin/assets/img/user-1.jpg" alt="" />
-                            <span class="hidden-xs">{{ session('adminDetail.name</span> <b class="caret"></b>
+                            <img src="{$admin.headimg}" alt="{$admin.name}" />
+                            <span class="hidden-xs">{$admin.name}</span> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu animated fadeInLeft">
                             <li class="arrow"></li>
-                            <li><a href="{{url('admin/manager/setting')}}">个人中心</a></li>
+                            <li><a href="{:url('admin/manager/setting')}">个人中心</a></li>
                             <li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
                             <li><a href="javascript:;">Calendar</a></li>
-                            <li><a href="{{url('admin/manager/changePwd')}}">修改密码</a></li>
+                            <li><a href="{:url('admin/manager/changePwd')}">修改密码</a></li>
                             <li class="divider"></li>
-                            <li><a href="{{ url('admin/logout">退出</a></li>
+                            <li><a href="{:url('admin/logout')}">退出</a></li>
                         </ul>
                     </li>
                 </ul>

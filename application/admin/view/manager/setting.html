@@ -1,15 +1,15 @@
-@extends('admin.layouts.master')
+{extend name="layouts/master" /}
 
-@section('admin-css')
-    <link href="{{ asset('asset_admin/assets/plugins/croppic/assets/css/croppic.css') }}" rel="stylesheet" type="text/css"/>
-@endsection
+{block name="admin-css"}
+    <link href="/asset_admin/assets/plugins/croppic/assets/css/croppic.css" rel="stylesheet" type="text/css"/>
+{/block}
 
-@section('admin-content')
+{block name="admin-content"}
     <div id="content" class="content">
         <!-- begin breadcrumb -->
         <ol class="breadcrumb pull-left">
             <li><a href="/admin">首页</a></li>
-            <li class="active"><a href="{{url('admin/manager/setting')}}">管理员设置</a></li>
+            <li class="active"><a href="{:url('admin/manager/setting')}">管理员设置</a></li>
         </ol>
         <!-- end breadcrumb -->
 
@@ -20,23 +20,23 @@
                 <!-- begin panel -->
                 <div class="panel panel-inverse" data-sortable-id="table-basic-5">
                     <div class="panel-heading">
-                        @include('admin.layouts.panel-btn')
+                        {include file="layouts/panel-btn" /}
                         <h4 class="panel-title">管理员设置</h4>
                     </div>
-                    @include('layouts.flash')
+                    {include file="layouts/flash" /}
                     <div class="panel-body">
-                        <a href="{{ url('admin/manager/changePwd') }}">
+                        <a href="{:url('admin/manager/changePwd')}">
                             <button type="button" class="btn btn-primary m-r-5 m-b-5"><i class="fa fa-plus-square-o"></i> 修改密码</button>
                         </a>
 
                         <table class="table table-bordered table-hover" id="datatable">
                             <tr>
                                 <th>名称：</th>
-                                <td>{{ session('adminDetail.name') }}</td>
+                                <td>{$admin.name}</td>
                             </tr>
                             <tr>
                                 <th>邮箱：</th>
-                                <td>{{ session('adminDetail.email') }}</td>
+                                <td>{$admin.email}</td>
                             </tr>      
                             <tr>
                                 <th>头像：</th>
@@ -54,30 +54,29 @@
         </div>
         <!-- end row -->
     </div>
-@endsection
+{/block}
 
-@section('admin-js')
-    <script src="{{ asset('asset_admin/assets/plugins/croppic/assets/js/jquery.mousewheel.min.js') }}"></script>
-    <script src="{{ asset('asset_admin/assets/plugins/croppic/assets/js/croppic.min.js') }}"></script>
+{block name="admin-js"}
+    <script src="/asset_admin/assets/plugins/croppic/assets/js/jquery.mousewheel.min.js"></script>
+    <script src="/asset_admin/assets/plugins/croppic/assets/js/croppic.min.js"></script>
 
     <script>
         var eyeCandy = $('#croppic');
-
-        @if(!empty(session('adminDetail.headimg')))
-            eyeCandy.css({'background-image':'url({{env("APP_URL")."/".session("adminDetail.headimg")}})'});
-        @endif
+        <?php if(!empty($adminDetail['headimg'])):?>
+            eyeCandy.css({'background-image':'url(<?php echo $adminDetail['headimg'];?>)'});
+        <?php endif;?>
         
         var croppedOptions = {
-            uploadUrl: "{{url('admin/crop/upload')}}",
-            cropUrl: "{{url('admin/crop/handle')}}",
+            uploadUrl: "{:url('admin/crop/upload')}",
+            cropUrl: "{:url('admin/crop/handle')}",
             outputUrlId:'headimg',
             onAfterImgCrop:function(){ 
                 var headimg_url = $('#headimg').val();
                 if(headimg_url.length > 0){
-                    var url = "{{url('admin/manager/setting')}}";
+                    var url = "{:url('admin/manager/setting')}";
                     $.get(
                         url,
-                        {headimg:headimg_url,_token:"{{ csrf_token() }}"},
+                        {headimg:headimg_url},
                         function(result){
                             if(result.code == 0 ){
                                 window.location = url;
@@ -94,4 +93,4 @@
         var cropperBox = new Croppic('croppic', croppedOptions);
         cropperBox.reset()
     </script>
-@endsection
+{/block}

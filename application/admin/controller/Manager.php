@@ -4,11 +4,11 @@ namespace app\admin\controller;
 use app\admin\controller\Common;
 
 //管理员
-class Admin extends Common
+class Manager extends Common
 {
-    public function index()
+    public function setting()
     {
-       	return $this->fetch('admin/index');
+       	return $this->fetch('manager/setting');
     }
 
 	public function create()

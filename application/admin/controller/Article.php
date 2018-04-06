@@ -3,6 +3,7 @@ namespace app\admin\controller;
 
 use app\admin\controller\Common;
 
+//文章
 class Article extends Common
 {
     public function index()

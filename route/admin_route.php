@@ -6,6 +6,7 @@ Route::post('admin/login/doLogin', 'admin/login/doLogin');
 
 //后台登录
 Route::get('admin/index', 'admin/index/index');
+Route::get('admin/manager', 'admin/manager/setting');
 
 Route::get('admin/admin/', 'admin/admin/index');
 Route::get('admin/admin/create', 'admin/admin/create');

@@ -18,13 +18,34 @@ function PR($arr){
 }
 
 /**
+ * 设置session
+ * 
+ * @param [type] $key   [description]
+ * @param [type] $value [description]
+ */
+function set_session($key,$value){
+	return \Session::set($key,json_encode($value));
+}	
+
+/**
+ * 获取session
+ * 
+ * @param [type] $key   [description]
+ * @param [type] $value [description]
+ */
+function get_session($key){
+	$value = \Session::get($key);
+	return json_decode($value,true);
+}
+
+/**
  * 返回数据格式化
  * 
  * @param  int    $code 状态码
  * @param  string $val  错误信息或数据
  * @return array  格式化后的数据
  */
-function dataFormat($code, $val = ''){
+function data_format($code, $val = ''){
     $key = ($code == 0) ? 'data' : 'err';
     return array('code' => $code, $key => $val);
 }
@@ -36,7 +57,7 @@ function dataFormat($code, $val = ''){
  * @param  string $val  错误信息或数据
  * @return array  格式化后的数据
  */
-function dataFormatFlash($code,$val,$flash = 'danger'){
+function data_format_flash($code,$val,$flash = 'danger'){
 	\Session::flash($flash,$val);
-    return dataFormat($code,$val);	
+    return data_format($code,$val);	
 }
