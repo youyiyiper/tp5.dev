@@ -62,24 +62,23 @@
 
     <script>
         var eyeCandy = $('#croppic');
-        <?php if(!empty($adminDetail['headimg'])):?>
-            eyeCandy.css({'background-image':'url(<?php echo $adminDetail['headimg'];?>)'});
+        <?php if(!empty($admin['headimg'])):?>
+            eyeCandy.css({'background-image':'url(<?php echo $admin['headimg'];?>)'});
         <?php endif;?>
         
         var croppedOptions = {
-            uploadUrl: "{:url('admin/crop/upload')}",
-            cropUrl: "{:url('admin/crop/handle')}",
+            uploadUrl: "{:url('admin/common/upload')}",
+            cropUrl: "{:url('admin/common/handle')}",
             outputUrlId:'headimg',
             onAfterImgCrop:function(){ 
                 var headimg_url = $('#headimg').val();
                 if(headimg_url.length > 0){
-                    var url = "{:url('admin/manager/setting')}";
-                    $.get(
-                        url,
+                    $.post(
+                        "/admin/saveHeadimg.html",
                         {headimg:headimg_url},
                         function(result){
                             if(result.code == 0 ){
-                                window.location = url;
+                                window.location = "/admin/manager.html";
                             }
                         }
                     );

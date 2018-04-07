@@ -1,7 +1,7 @@
 <?php
 namespace app\admin\library;
 
-use app\admin\library\AdminsLib;
+use app\admin\library\AdminLib;
 
 class LoginLib
 {
@@ -19,13 +19,13 @@ class LoginLib
         }
 
         //检查登录
-        $admin = AdminsLib::getAdminInfoByEmail($post['email']);
+        $admin = AdminLib::getAdminInfoByEmail($post['email']);
         if(!$admin) {
             return data_format_flash(lang('code_email_not_exists'),lang('tips_email_not_exists'));
         }
         
         //检查状态
-        if ($admin->status !== AdminsLib::STATUS_VALID) {
+        if ($admin->status !== AdminLib::STATUS_VALID) {
             return data_format_flash(lang('code_status_no_valid'),lang('tips_status_no_valid'));    
         }
 

@@ -25,7 +25,7 @@
                         <h4 class="panel-title">管理员列表</h4>
                     </div>
                     <div class="panel-body">
-                        <a href="{{ url('admin/admin/create">
+                        <a href="{:url('admin/admin/create')}">
                             <button type="button" class="btn btn-primary m-r-5 m-b-5"><i class="fa fa-plus-square-o"></i> 新增</button>
                         </a>
                                                 
@@ -35,36 +35,40 @@
                                     <th>id</th>
                                     <th>名称</th>
                                     <th>邮箱</th>
+                                    <th>头像</th>
                                     <th>角色</th>
+                                    <th>状态</th>
                                     <th>添加时间</th>
                                     <th>更新时间</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($admins as $admin)
+                                {foreach $list as $key=>$vo } 
                                     <tr>
-                                        <td>{{$admin->id}}</td>
-                                        <td>{{$admin->name}}</td>
-                                        <td>{{$admin->email}}</td>
-                                        <td>{{$admin->role_name}}</td>
-                                        <td>{{$admin->created_at}}</td>
-                                        <td>{{$admin->updated_at}}</td>
+                                        <td>{$vo.id}</td>
+                                        <td>{$vo.name}</td>
+                                        <td>{$vo.email}</td>
+                                        <td><img src="{$vo.headimg}" /></td>
+                                        <td>{$vo.role_id|get_role_title}</td>
+                                        <td>{$vo.status|get_status_title}</td>
+                                        <td>{$vo.created_at}</td>
+                                        <td>{$vo.updated_at}</td>
                                         <td>
-                                            <a href="{{ url('admin/admin',[$admin->id,'edit']) }}"><button type="button" class="btn btn-success btn-xs"><i class="fa fa-pencil"> 编辑</i></button></a>
+                                            <a href="{:url('admin/admin/edit',['id'=>$vo.id])}"><button type="button" class="btn btn-success btn-xs"><i class="fa fa-pencil"> 编辑</i></button></a>
 
-                                            <a href="javascript:;" data-id="{{ $admin->id }}" class="btn btn-danger btn-xs destroy">
+                                            <a href="javascript:;" data-id="{$vo.id}" class="btn btn-danger btn-xs destroy">
                                                 <i class="fa fa-trash"> 删除</i>
-                                                <form action="{{ url('admin/admin',[$admin->id]) }}" method="POST" name="delete_item_{{ $admin->id }}" style="display:none">
-                                                {{ method_field('DELETE{{ csrf_field() }}
+                                                <form action="{:url('admin/'.$vo->id)}" method="POST" name="delete_item_{$vo.id}" style="display:none">
+                                                    <input type="hidden" name="_method" value="DELETE">
                                                 </form>
                                             </a>
                                         </td>
                                     </tr>                                    
-                                @endforeach                                
+                                {/foreach}
                             </tbody>
                         </table>
-                        {{$admins->links()}}
+                        {$list|Raw}
                     </div>
                 </div>
                 <!-- end panel -->
@@ -80,13 +84,13 @@
     <script src="/asset_admin/assets/plugins/bootstrap-sweetalert-master/dist/sweetalert.js"></script>
     <script>
         $(function(){
-            @if (session()->has('flash_notification_message'))
+            <?php if(\Session::has('flash_notification_message')):?>
                 //通知信息
                 $.gritter.add({
                     title: '操作消息！',
-                    text: '{!! session('flash_notification_message') !!}'
+                    text: '<?php echo \Session::get('flash_notification_message');?>'
                 });
-            @endif
+            <?php endif;?>
 
             //删除
             $(document).on('click','.destroy',function(){

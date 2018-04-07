@@ -1,8 +1,8 @@
-@extends('admin.layouts.master')
+{extend name="layouts/master" /}
 
-@section('admin-css')
-    <link href="{{ asset('asset_admin/assets/plugins/parsley/src/parsley.css') }}" rel="stylesheet" />
-    <link href="{{ asset('asset_admin/assets/plugins/switchery/switchery.min.css') }}" rel="stylesheet" />
+{block name="admin-css"}
+    <link href="/asset_admin/assets/plugins/parsley/src/parsley.css" rel="stylesheet" />
+    <link href="/asset_admin/assets/plugins/switchery/switchery.min.css" rel="stylesheet" />
     <style type="text/css">
         #permission li{
            list-style:none;
@@ -26,14 +26,14 @@
             margin-left:260px;
         }                
     </style>
-@endsection
+{/block}
 
-@section('admin-content')
+{block name="admin-content"}
     <div id="content" class="content">
         <!-- begin breadcrumb -->
         <ol class="breadcrumb pull-left">
             <li><a href="/admin">首页</a></li>
-            <li><a href="{{url('admin/role')}}">角色列表</a></li>
+            <li><a href="{:url('admin/role')}">角色列表</a></li>
             <li class="active">新增角色</li>         
         </ol>
         <!-- end breadcrumb -->
@@ -45,23 +45,23 @@
                 <!-- begin panel -->
                 <div class="panel panel-inverse" data-sortable-id="form-validation-1">
                     <div class="panel-heading">
-                        @include('admin.layouts.panel-btn')
+                        {include file="layouts/panel-btn" /}
                         <h4 class="panel-title">新增角色</h4>
                     </div>
-                    @include('layouts.flash')
+
+                    {include file="layouts/flash" /}
                     <div class="panel-body panel-form">
-                        <form class="form-horizontal form-bordered" data-parsley-validate="true" action="{{ url('admin/role') }}" method="POST">
-                            {{ csrf_field() }}
+                        <form class="form-horizontal form-bordered" data-parsley-validate="true" action="{:url('admin/role')}" method="POST">
                             <div class="form-group">
                                 <label class="control-label col-md-2 col-sm-2" for="name">角色 * :</label>
                                 <div class="col-md-4 col-sm-4">
-                                    <input class="form-control" type="text" name="name" placeholder="角色名称" value="{{ old('name') }}" data-parsley-required="true" data-parsley-required-message="请输入角色名称" data-parsley-length="[2,30]" data-parsley-length-message="角色名称长度2~30字符" />
+                                    <input class="form-control" type="text" name="name" placeholder="角色名称" value="" data-parsley-required="true" data-parsley-required-message="请输入角色名称" data-parsley-length="[2,30]" data-parsley-length-message="角色名称长度2~30字符" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2 col-sm-2" for="desc">描述 * :</label>
                                 <div class="col-md-4 col-sm-4">
-                                    <input class="form-control" type="text" name="desc" placeholder="描述"  value="{{ old('desc') }}" data-parsley-required="true" data-parsley-required-message="请输入角色描述" data-parsley-length="[2,30]" data-parsley-length-message="角色描述名称长度2~30字符"/>
+                                    <input class="form-control" type="text" name="desc" placeholder="描述"  value="" data-parsley-required="true" data-parsley-required-message="请输入角色描述" data-parsley-length="[2,30]" data-parsley-length-message="角色描述名称长度2~30字符"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -105,11 +105,11 @@
         </div>
         <!-- end row -->
     </div>
-@endsection
+{/block}
 
-@section('admin-js')
-    <script src="{{ asset('asset_admin/assets/plugins/parsley/dist/parsley.js') }}"></script>
-    <script src="{{ asset('asset_admin/assets/plugins/switchery/switchery.min.js') }}"></script>
+{block name="admin-js"}
+    <script src="/asset_admin/assets/plugins/parsley/dist/parsley.js"></script>
+    <script src="/asset_admin/assets/plugins/switchery/switchery.min.js"></script>
     <script>
         $(document).ready(function() {
             renderSwitcher();
@@ -154,4 +154,4 @@
             });
         }
     </script>
-@endsection
+{/block}
