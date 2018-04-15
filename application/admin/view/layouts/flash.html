@@ -3,23 +3,17 @@
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <?php echo \Session::get('danger');?>
     </div>  
-<?php endif;?>
-
-<?php if(\Session::has('success')):?>
+<?php elseif(\Session::has('success')):?>
     <div class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <?php echo \Session::get('success');?>
-    </div>   
-<?php endif;?>
-
-<?php if(\Session::has('info')):?>
+    </div>
+<?php elseif(\Session::has('info')):?>
     <div class="alert alert-info alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <?php echo \Session::get('info');?>
-    </div>   
-<?php endif;?>
-
-<?php if(\Session::has('warning')):?>
+    </div>
+<?php elseif(\Session::has('warning')):?>
     <div class="alert alert-warning alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <?php echo \Session::get('warning');?>

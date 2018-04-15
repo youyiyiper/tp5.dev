@@ -32,7 +32,7 @@ class AdminLib
 		}
 
 		$list = Admins::where($map)->order('created_at desc,status desc')->paginate(10);
-		return $list;
+		return $list ? $list : [];
 	}
 
 	/**

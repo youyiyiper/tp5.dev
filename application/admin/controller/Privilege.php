@@ -2,10 +2,10 @@
 
 namespace app\admin\controller;
 
-use think\Controller;
+use app\admin\controller\Common;
 use think\Request;
 
-class Privilege extends Controller
+class Privilege extends Common
 {
     /**
      * 显示资源列表
@@ -14,7 +14,7 @@ class Privilege extends Controller
      */
     public function index()
     {
-        //
+        return $this->fetch('privilege/index');
     }
 
     /**
@@ -24,7 +24,8 @@ class Privilege extends Controller
      */
     public function create()
     {
-        //
+        $this->assign('parentPrivilege',array());
+        return $this->fetch('privilege/create');
     }
 
     /**
@@ -39,17 +40,6 @@ class Privilege extends Controller
     }
 
     /**
-     * 显示指定的资源
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function read($id)
-    {
-        //
-    }
-
-    /**
      * 显示编辑资源表单页.
      *
      * @param  int  $id
@@ -57,7 +47,7 @@ class Privilege extends Controller
      */
     public function edit($id)
     {
-        //
+        return $this->fetch('privilege/edit');
     }
 
     /**

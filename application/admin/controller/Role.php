@@ -2,10 +2,10 @@
 
 namespace app\admin\controller;
 
-use think\Controller;
+use app\admin\controller\Common;
 use think\Request;
 
-class Role extends Controller
+class Role extends Common
 {
     /**
      * 显示资源列表
@@ -14,7 +14,8 @@ class Role extends Controller
      */
     public function index()
     {
-        //
+        $this->assign('list',[]);
+        return $this->fetch('role/index');
     }
 
     /**
@@ -24,7 +25,7 @@ class Role extends Controller
      */
     public function create()
     {
-        //
+        return $this->fetch('role/create');
     }
 
     /**
@@ -39,17 +40,6 @@ class Role extends Controller
     }
 
     /**
-     * 显示指定的资源
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function read($id)
-    {
-        //
-    }
-
-    /**
      * 显示编辑资源表单页.
      *
      * @param  int  $id
@@ -57,7 +47,7 @@ class Role extends Controller
      */
     public function edit($id)
     {
-        //
+        return $this->fetch('role/edit');
     }
 
     /**

@@ -2,10 +2,11 @@
 
 namespace app\admin\controller;
 
-use think\Controller;
+use app\admin\controller\Common;
+use app\admin\library\SidebarLib;
 use think\Request;
 
-class Sidebar extends Controller
+class Sidebar extends Common
 {
     /**
      * 显示资源列表
@@ -14,7 +15,9 @@ class Sidebar extends Controller
      */
     public function index()
     {
-        //
+        $list = SidebarLib::getAllSidebar();
+        $this->assign('list',no_limit_category($list));
+        return $this->fetch('sidebar/index');
     }
 
     /**
@@ -24,7 +27,9 @@ class Sidebar extends Controller
      */
     public function create()
     {
-        //
+        $parentSidebar = SidebarLib::getOptionData();
+        $this->assign('parentSidebar',no_limit_category($parentSidebar));
+        return $this->fetch('sidebar/create');
     }
 
     /**
@@ -35,18 +40,12 @@ class Sidebar extends Controller
      */
     public function save(Request $request)
     {
-        //
-    }
-
-    /**
-     * 显示指定的资源
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function read($id)
-    {
-        //
+        $res = SidebarLib::handleAdd(input('post.'));
+        if($res['code'] == lang('code_success')){
+            $this->redirect('admin/sidebar/create');
+        }else{
+            $this->redirect('admin');
+        }
     }
 
     /**
@@ -57,7 +56,10 @@ class Sidebar extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->assign('data',SidebarLib::getInfoById($id));
+        $parentSidebar = SidebarLib::getOptionData();
+        $this->assign('parentSidebar',no_limit_category($parentSidebar));        
+        return $this->fetch('sidebar/edit');
     }
 
     /**
@@ -69,7 +71,12 @@ class Sidebar extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $res = SidebarLib::handleUpdate(input('post.'),$id);
+        if($res['code'] == lang('code_success')){
+            $this->redirect('admin/sidebar/'.$id.'/edit');
+        }else{
+            $this->redirect('admin/sidebar/');
+        }
     }
 
     /**
@@ -80,6 +87,8 @@ class Sidebar extends Controller
      */
     public function delete($id)
     {
-        //
+        $flag = SidebarLib::deleteData(array('id' => $id),array('status' => 0));
+        \Session::flash('flash_notification_message','删除成功!');
+        $this->redirect('admin/sidebar/');
     }
 }

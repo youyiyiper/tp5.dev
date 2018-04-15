@@ -26,20 +26,22 @@
                     <?php endif;?>
 
                     <?php if(!empty($adminMenu['class'])):?>
-                    <i class="{{ $adminMenu['class'] }}"></i>
+                    <i class="{$adminMenu['class']}"></i>
                     <?php endif;?>
-                    <span>{{ $adminMenu['name'] }}</span>
+
+                    <span>{$adminMenu['name']}</span>
                 </a>
 
                 <?php if(isset($adminMenu['child'])):?>
                 <ul class="sub-menu">
                     <?php foreach($adminMenu['child'] as $menus):?>
                     <li class="has-sub @if($menus['url'] == Request::path()) active @endif">
-                        <a href="{{ url($menus['url']) }}">
+                        <a href="{:url($menus['url'])}">
                             <?php if(isset($menus['child'])):?>
                             <b class="caret pull-right"></b>
                             <?php endif;?>
-                            {{ $menus['name'] }}
+
+                            {$menus['name']}
                         </a>
                     </li>
                     <?php endforeach;?>

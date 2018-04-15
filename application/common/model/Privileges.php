@@ -4,6 +4,6 @@ namespace app\common\model;
 
 use think\Model;
 
-class Tags extends Model
+class Privileges extends Model
 {
 }
