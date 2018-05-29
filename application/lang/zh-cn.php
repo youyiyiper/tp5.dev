@@ -8,17 +8,17 @@ return [
 	'code_param_must' 				=> 2,
 
 	//邮箱
-	'code_email_not_exists' 		=> 10,
-	'code_email_exists' 			=> 11,
-	'code_status_no_valid' 			=> 20,
+	'code_email_not_exists' 		=> 100,
+	'code_email_exists' 			=> 101,
+	'code_status_no_valid' 			=> 102,
 
 	//登录相关
-	'code_incorrect_password' 		=> 30,
-	'code_password_no_equal' 		=> 31,
+	'code_incorrect_password' 		=> 300,
+	'code_password_no_equal' 		=> 301,
 	
 	//权限
-	'code_privilege_exists' 		=> 100,
-	'code_role_exists' 				=> 110,
+	'code_privilege_exists' 		=> 400,
+	'code_role_exists' 				=> 410,
 
 	// 700-799 数据库相关
 	'code_db_search_err'     		=> 700,  // 数据库查找数据失败
