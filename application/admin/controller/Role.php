@@ -90,8 +90,7 @@ class Role extends Common
      */
     public function delete($id)
     {
-        RoleLib::destroyData(array('id' => $id),(new \app\common\model\Roles));
-        \Session::flash('flash_notification_message','删除成功!');
-        
+        #RoleLib::destroyData(array('id' => $id),(new \app\common\model\Roles));
+        #\Session::flash('flash_notification_message','删除成功!');
     }
 }

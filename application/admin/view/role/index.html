@@ -61,12 +61,12 @@
                                         <td>
                                             <a href="{:url('admin/role/edit',['id'=>$vo.id])}"><button type="button" class="btn btn-success btn-xs"><i class="fa fa-pencil"> 编辑</i></button></a>
 
-                                            <a href="javascript:;" data-id="{$vo.id}" class="btn btn-danger btn-xs destroy">
+                                            <!-- <a href="javascript:;" data-id="{$vo.id}" class="btn btn-danger btn-xs destroy">
                                                 <i class="fa fa-trash"> 删除</i>
                                                 <form action="{:url('admin/role/'.$vo.id)}" method="POST" name="delete_item_{$vo.id}" style="display:none">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                 </form>
-                                            </a>
+                                            </a> -->
                                         </td>
                                     </tr>                                    
                                 {/foreach}                                
