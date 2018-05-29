@@ -8,22 +8,22 @@
            list-style:none;
         } 
         #permission .level1{
-            margin-left:60px;
+            margin-left:40px;
         }
         #permission .level2{
-            margin-left:100px;
+            margin-left:80px;
         }
         #permission .level3{
-            margin-left:140px;
+            margin-left:120px;
         }
         #permission .level4{
-            margin-left:180px;
+            margin-left:160px;
         }
         #permission .level5{
-            margin-left:220px;
+            margin-left:200px;
         }
         #permission .level6{
-            margin-left:260px;
+            margin-left:240px;
         }                
     </style>
 {/block}
@@ -51,7 +51,7 @@
 
                     {include file="layouts/flash" /}
                     <div class="panel-body panel-form">
-                        <form class="form-horizontal form-bordered" data-parsley-validate="true" action="{:url('admin/role')}" method="POST">
+                        <form class="form-horizontal form-bordered" data-parsley-validate="true" action="{:url('admin/role/save')}" method="POST">
                             <div class="form-group">
                                 <label class="control-label col-md-2 col-sm-2" for="name">角色 * :</label>
                                 <div class="col-md-4 col-sm-4">
@@ -80,12 +80,12 @@
                                     <hr>
 
                                     <div class="row" id="permission">
-                                        <ul>
-                                            @foreach($privileges as $value)
-                                            <li class="level{{$value['level']}}" id="{{$value['id']}}" pid="{{$value['pid']}}">
-                                                <input type="checkbox" name="permission[]" data-render="switchery" data-theme="purple" value="{{$value['id']}}" />{{$value['name']}}
+                                        <ul>                                            
+                                            {foreach $privileges as $key=>$vo } 
+                                            <li class="level{$vo['level']}" id="{$vo['id']}" pid="{$vo['pid']}">
+                                                <label><input type="checkbox" name="permission[]" value="{$vo['id']}" />{$vo['name']}</label>
                                             </li>
-                                            @endforeach
+                                            {/foreach}
                                         </ul>
                                     </div>
                                 </div>

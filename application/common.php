@@ -39,6 +39,16 @@ function get_session($key){
 }
 
 /**
+ * 获取session 键 的值
+ * @return [type] [description]
+ */
+function get_session_key_value($key){
+    $key_arr = explode('.',$key);
+    $arr = get_session($key_arr[0]);
+    return isset($arr[$key_arr[1]]) ? $arr[$key_arr[1]] : '';
+}
+
+/**
  * 返回数据格式化
  * 
  * @param  int    $code 状态码
@@ -60,4 +70,42 @@ function data_format($code, $val = ''){
 function data_format_flash($code,$val,$flash = 'danger'){
 	\Session::flash($flash,$val);
     return data_format($code,$val);	
+}
+
+/**
+ * 获取无线级分类列表
+ */
+function no_limit_category($array,$pid = 0,$level = 0)
+{
+    static $arr=array();
+    foreach($array as $val){
+        if($val['pid'] == $pid){
+            $val['level'] = $level;
+            $arr[]=$val;
+            no_limit_category($array,$val['id'],$level+1);
+        }
+    }
+    return $arr;
+}
+
+/**
+ * 树形菜单
+ */
+function get_tree($items,$id='id',$pid='pid',$son = 'child'){
+    $tree = array(); //格式化的树
+    $tmpMap = array();  //临时扁平数据
+     
+    foreach ($items as $item) {
+        $tmpMap[$item[$id]] = $item;
+    }
+     
+    foreach ($items as $item) {
+        if (isset($tmpMap[$item[$pid]])) {
+            $tmpMap[$item[$pid]][$son][] = &$tmpMap[$item[$id]];
+        } else {
+            $tree[] = &$tmpMap[$item[$id]];
+        }
+    }
+    unset($tmpMap);
+    return $tree;
 }

@@ -16,6 +16,9 @@ return [
 	'code_incorrect_password' 		=> 30,
 	'code_password_no_equal' 		=> 31,
 	
+	//权限
+	'code_privilege_exists' 		=> 100,
+	'code_role_exists' 				=> 110,
 
 	// 700-799 数据库相关
 	'code_db_search_err'     		=> 700,  // 数据库查找数据失败
@@ -40,6 +43,10 @@ return [
 
 	//登录
 	'tips_password_no_equal'		=> '两次密码不一致',
+
+	//权限
+	'tips_privilege_exists' 		=> '权限已存在',
+	'tips_role_exists' 				=> '角色已存在',
 
 	//数据库相关
 	'tips_search_nothing'       	=> '没找到更多数据!', 

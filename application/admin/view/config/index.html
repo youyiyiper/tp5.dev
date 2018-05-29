@@ -1,8 +1,8 @@
 {extend name="layouts/master" /}
 
 {block name="admin-css"}
-    <link href="/asset_admin/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" type="text/css">
-    <link href="/asset_admin/assets/plugins/bootstrap-sweetalert-master/dist/sweetalert.css" rel="stylesheet" type="text/css">
+    <!-- 提示插件 -->
+    {include file="layouts/gritter_and_delete_css" /}
 {/block}
 
 {block name="admin-content"}
@@ -22,20 +22,29 @@
                 <div class="panel panel-inverse" data-sortable-id="table-basic-5">
                     <div class="panel-heading">
                         {include file="layouts/panel-btn" /}
-                        <h4 class="panel-title">菜单列表</h4>
+                        <h4 class="panel-title">配置列表</h4>
                     </div>
                     <div class="panel-body">
-                        <a href="{:url('admin/sidebar/create')}">
+                        <a href="{:url('admin/config/create')}">
                             <button type="button" class="btn btn-primary m-r-5 m-b-5"><i class="fa fa-plus-square-o"></i> 新增</button>
                         </a>
+                        
+                        <form>
+                            <table class="table table-bordered form-group">
+                                <tr>
+                                    <th><input class="form-control" type="text" name="name" placeholder="配置标识" value="{:input('get.name','')}"/></th>
+                                    <th><input class="form-control" type="text" name="title" placeholder="配置名称" value="{:input('get.title','')}"/></th>
+                                    <th><button type="submit" id="search_btn" class="btn btn-primary m-r-5 m-b-5">查询</button></th>
+                                </tr>
+                            </table> 
+                        </form>                         
 
                         <table class="table table-bordered table-hover" id="data_table">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>名称</th>
-                                    <th>icon</th>
-                                    <th>菜单地址</th>
+                                    <th>标识</th>
                                     <th>创建时间</th>
                                     <th>更新时间</th>
                                     <th>操作</th>
@@ -45,17 +54,16 @@
                                {foreach $list as $key=>$vo } 
                                     <tr>
                                         <td>{$vo['id']}</td>
-                                        <td>{:str_repeat('&nbsp;',$vo['level']*4)} {$vo['name']}</td>
-                                        <td>{$vo['class']}</td>
-                                        <td>{$vo['url']}</td>
+                                        <td>{$vo['name']}</td>
+                                        <td>{$vo['title']}</td>
                                         <td>{$vo['created_at']}</td>
                                         <td>{$vo['updated_at']}</td>
                                         <td>
-                                            <a href="{:url('admin/sidebar/edit',['id'=>$vo.id])}"><button type="button" class="btn btn-success btn-xs"><i class="fa fa-pencil"> 编辑</i></button></a>
+                                            <a href="{:url('admin/config/edit',['id'=>$vo.id])}"><button type="button" class="btn btn-success btn-xs"><i class="fa fa-pencil"> 编辑</i></button></a>
 
                                             <a href="javascript:;" data-id="{$vo.id}" class="btn btn-danger btn-xs destroy">
                                                 <i class="fa fa-trash"> 删除</i>
-                                                <form action="{:url('admin/'.$vo.id)}" method="POST" name="delete_item_{$vo.id}" style="display:none">
+                                                <form action="{:url('admin/config/'.$vo.id)}" method="POST" name="delete_item_{$vo.id}" style="display:none">
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 </form>
                                             </a>
@@ -64,6 +72,7 @@
                                {/foreach}
                             </tbody>
                         </table>
+                        {$list|raw}
                     </div>
                 </div>
                 <!-- end panel -->
@@ -75,36 +84,6 @@
 {/block}
 
 {block name="admin-js"}
-    <script src="/asset_admin/assets/plugins/gritter/js/jquery.gritter.js"></script>
-    <script src="/asset_admin/assets/plugins/bootstrap-sweetalert-master/dist/sweetalert.js"></script>
-    <script>
-        $(function(){
-            //通知信息
-            <?php if(\Session::has('flash_notification_message')):?>
-                $.gritter.add({
-                    title: '操作消息！',
-                    text: '<?php echo \Session::get('flash_notification_message');?>'
-                });
-            <?php endif;?>
-
-            //删除
-            $(document).on('click','.destroy',function(){
-                var _delete_id = $(this).attr('data-id');
-                swal({
-                        title: "确定删除？",
-                        text: "删除将不可逆，请谨慎操作！",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonClass: "btn-danger",
-                        cancelButtonText: "取消",
-                        confirmButtonText: "确定",
-                        closeOnConfirm: false
-                    },
-                    function () {
-                        $('form[name=delete_item_'+_delete_id+']').submit();
-                    }
-                );
-            });
-        });
-    </script>
+    <!-- 提示插件 -->
+    {include file="layouts/gritter_and_delete_js" /}
 {/block}

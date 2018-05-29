@@ -26,7 +26,7 @@
                     <?php endif;?>
 
                     <?php if(!empty($adminMenu['class'])):?>
-                    <i class="{$adminMenu['class']}"></i>
+                    <i class=""></i>
                     <?php endif;?>
 
                     <span>{$adminMenu['name']}</span>
@@ -35,12 +35,11 @@
                 <?php if(isset($adminMenu['child'])):?>
                 <ul class="sub-menu">
                     <?php foreach($adminMenu['child'] as $menus):?>
-                    <li class="has-sub @if($menus['url'] == Request::path()) active @endif">
+                    <li class="has-sub <?php if($menus['url'] == \Request::path()):?> active <?php endif;?> ">
                         <a href="{:url($menus['url'])}">
-                            <?php if(isset($menus['child'])):?>
+                            <!-- <?php if(isset($menus['child'])):?>
                             <b class="caret pull-right"></b>
-                            <?php endif;?>
-
+                            <?php endif;?> -->
                             {$menus['name']}
                         </a>
                     </li>

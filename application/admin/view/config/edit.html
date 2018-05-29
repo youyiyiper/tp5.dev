@@ -1,0 +1,74 @@
+{extend name="layouts/master" /}
+
+{block name="admin-css"}
+    <link href="/asset_admin/assets/plugins/parsley/src/parsley.css" rel="stylesheet" />
+    <link href="/asset_admin/assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+{/block}
+
+{block name="admin-content"}
+    <div id="content" class="content">
+        <!-- begin breadcrumb -->
+        <ol class="breadcrumb pull-left">
+            <li><a href="/admin">首页</a></li>
+            <li><a href="{:url('admin/config/')}">配置列表</a></li>
+            <li class="active">修改配置</li>         
+        </ol>
+        <!-- end breadcrumb -->
+
+        <!-- begin row -->
+        <div class="row">
+            <!-- begin col-6 -->
+            <div class="col-md-12">
+                <!-- begin panel -->
+                <div class="panel panel-inverse" data-sortable-id="form-validation-1">
+                    <div class="panel-heading">
+                        {include file="layouts/panel-btn" /}
+                        <h4 class="panel-title">修改配置</h4>
+                    </div>
+                    {include file="layouts/flash" /}
+                    <div class="panel-body panel-form">
+                        <form class="form-horizontal form-bordered" data-parsley-validate="true" action="{:url('admin/config/'.$data.id)}" method="post">
+                            <div class="form-group">
+                                <label class="control-label col-md-2 col-sm-2" for="name">配置标识 * :</label>
+                                <div class="col-md-4 col-sm-4">
+                                    <input class="form-control" type="text" name="name" placeholder="配置标识" data-parsley-required="true" data-parsley-required-message="请输入配置标识" value="{$data.name}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2 col-sm-2" for="title">配置名称 * :</label>
+                                <div class="col-md-4 col-sm-4">
+                                    <input class="form-control" type="text" name="title" placeholder="配置名称" data-parsley-required="true" data-parsley-required-message="请输入配置名称" value="{$data.title}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2 col-sm-2" for="class">配置内容 * :</label>
+                                <div class="col-md-4 col-sm-4">
+                                    <textarea class="form-control" name="content" placeholder="配置内容" style="height:200px;">{$data.content}</textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="hidden" name="_method" value="PUT">
+                                <label class="control-label col-md-2 col-sm-2"></label>
+                                <div class="col-md-4 col-sm-4">
+                                    <button type="submit" class="btn btn-primary">提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- end panel -->
+            </div>
+            <!-- end col-6 -->
+        </div>
+        <!-- end row -->
+    </div>
+{/block}
+
+{block name="admin-js"}
+    <script src="/asset_admin/assets/plugins/parsley/dist/parsley.js"></script>
+    <script src="/asset_admin/assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+    <script>
+        $('.selectpicker').selectpicker('render');
+    </script>
+{/block}

@@ -20,4 +20,4 @@ Route::get('admin/logout','admin/Manager/logout');
 Route::resource('admin/admin','admin/Admin');
 Route::resource('admin/role','admin/Role');
 Route::resource('admin/privilege','admin/Privilege');
-Route::resource('admin/sidebar','admin/Sidebar');
+Route::resource('admin/config','admin/Config');

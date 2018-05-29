@@ -3,10 +3,10 @@
 namespace app\admin\controller;
 
 use app\admin\controller\Common;
-use app\admin\library\SidebarLib;
+use app\admin\library\ConfigLib;
 use think\Request;
 
-class Sidebar extends Common
+class Config extends Common
 {
     /**
      * 显示资源列表
@@ -15,9 +15,9 @@ class Sidebar extends Common
      */
     public function index()
     {
-        $list = SidebarLib::getAllSidebar();
-        $this->assign('list',no_limit_category($list));
-        return $this->fetch('sidebar/index');
+        $list = ConfigLib::getAllConfig(input('get.'));
+        $this->assign('list',$list);
+        return $this->fetch('config/index');
     }
 
     /**
@@ -27,9 +27,7 @@ class Sidebar extends Common
      */
     public function create()
     {
-        $parentSidebar = SidebarLib::getOptionData();
-        $this->assign('parentSidebar',no_limit_category($parentSidebar));
-        return $this->fetch('sidebar/create');
+        return $this->fetch('config/create');
     }
 
     /**
@@ -40,11 +38,11 @@ class Sidebar extends Common
      */
     public function save(Request $request)
     {
-        $res = SidebarLib::handleAdd(input('post.'));
+        $res = ConfigLib::handleAdd(input('post.'));
         if($res['code'] == lang('code_success')){
-            $this->redirect('admin/sidebar/create');
+            $this->redirect('/admin/config/create');
         }else{
-            $this->redirect('admin');
+            $this->redirect('/admin/config');
         }
     }
 
@@ -56,10 +54,8 @@ class Sidebar extends Common
      */
     public function edit($id)
     {
-        $this->assign('data',SidebarLib::getInfoById($id));
-        $parentSidebar = SidebarLib::getOptionData();
-        $this->assign('parentSidebar',no_limit_category($parentSidebar));        
-        return $this->fetch('sidebar/edit');
+        $this->assign('data',ConfigLib::getInfoById($id));       
+        return $this->fetch('config/edit');
     }
 
     /**
@@ -71,11 +67,11 @@ class Sidebar extends Common
      */
     public function update(Request $request, $id)
     {
-        $res = SidebarLib::handleUpdate(input('post.'),$id);
+        $res = ConfigLib::handleUpdate(input('post.'),$id);
         if($res['code'] == lang('code_success')){
-            $this->redirect('admin/sidebar/'.$id.'/edit');
+            $this->redirect('/admin/config/'.$id.'/edit');
         }else{
-            $this->redirect('admin/sidebar/');
+            $this->redirect('/admin/config/');
         }
     }
 
@@ -87,8 +83,8 @@ class Sidebar extends Common
      */
     public function delete($id)
     {
-        $flag = SidebarLib::deleteData(array('id' => $id),array('status' => 0));
+        $flag = ConfigLib::destroyData(array('id' => $id),(new \app\common\model\Configs));
         \Session::flash('flash_notification_message','删除成功!');
-        $this->redirect('admin/sidebar/');
+        $this->redirect('/admin/config/');
     }
 }

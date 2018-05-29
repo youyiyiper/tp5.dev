@@ -1,0 +1,32 @@
+<script src="/asset_admin/assets/plugins/gritter/js/jquery.gritter.js"></script>
+<script src="/asset_admin/assets/plugins/bootstrap-sweetalert-master/dist/sweetalert.js"></script>
+<script>
+    $(function(){
+        <?php if(\Session::has('flash_notification_message')):?>
+            //通知信息
+            $.gritter.add({
+                title: '操作消息！',
+                text: '<?php echo \Session::get('flash_notification_message');?>'
+            });
+        <?php endif;?>
+
+        //删除
+        $(document).on('click','.destroy',function(){
+            var _delete_id = $(this).attr('data-id');
+            swal({
+                    title: "确定删除？",
+                    text: "删除将不可逆，请谨慎操作！",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    cancelButtonText: "取消",
+                    confirmButtonText: "确定",
+                    closeOnConfirm: false
+                },
+                function () {
+                    $('form[name=delete_item_'+_delete_id+']').submit();
+                }
+            );
+        });
+    });
+</script>

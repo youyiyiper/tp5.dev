@@ -26,7 +26,7 @@
                     </div>
                     {include file="layouts/flash" /}
                     <div class="panel-body panel-form">
-                        <form class="form-horizontal form-bordered" data-parsley-validate="true" action="{:url('admin/privilege')}" method="POST">
+                        <form class="form-horizontal form-bordered" data-parsley-validate="true" action="{:url('admin/privilege/save')}" method="POST">
                             <div class="form-group">
                                 <label class="control-label col-md-2 col-sm-2" for="name">权限名称 * :</label>
                                 <div class="col-md-4 col-sm-4">
@@ -56,13 +56,35 @@
                                             data-parsley-required-message="请选择上级权限"
                                             name="pid">
                                         <option value="0">-- 顶级权限 --</option>
-                                        {foreach $parentPrivilege as $key=>$vo } 
+                                        {foreach $list as $key=>$vo } 
                                         <option value="{$vo['id']}">{:str_repeat('&nbsp;',$vo['level'] * 4)}{$vo['name']}</option>
                                         {/foreach}                                        
                                     </select>
                                     <p id="parent_id_error"></p>
                                 </div>
-                            </div>                            
+                            </div> 
+                            <div class="form-group">
+                                <label class="control-label col-md-2 col-sm-2" for="desc">是否菜单显示 :</label>
+                                <div class="col-md-1 col-sm-1">
+                                    <input class="form-control" type="checkbox" name="is_menu" value="1" id="is_menu"/>
+                                </div>
+                            </div>
+
+                            <div id="box">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 col-sm-2" for="url">菜单地址 :</label>
+                                    <div class="col-md-4 col-sm-4">
+                                        <input class="form-control" type="text" name="url" placeholder="菜单地址" value="" />
+                                    </div>  
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 col-sm-2" for="class">菜单icon :</label>
+                                    <div class="col-md-4 col-sm-4">
+                                        <input class="form-control" type="text" name="class" placeholder="菜单icon" value="" />
+                                    </div>  
+                                </div>          
+                            </div>
+
                             <div class="form-group">
                                 <label class="control-label col-md-2 col-sm-2"></label>
                                 <div class="col-md-4 col-sm-4">
@@ -82,4 +104,16 @@
 
 {block name="admin-js"}
     <script src="/asset_admin/assets/plugins/parsley/dist/parsley.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#box').hide();
+            $('#is_menu').click(function(event) {
+                if ($(this).is(":checked")){
+                    $('#box').show();
+                } else {
+                    $('#box').hide();
+                }
+            });
+        })
+    </script>
 {/block}

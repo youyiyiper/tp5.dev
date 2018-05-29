@@ -4,6 +4,7 @@ namespace app\admin\controller;
 
 use app\admin\controller\Common;
 use think\Request;
+use app\admin\library\PrivilegeLib;
 
 class Privilege extends Common
 {
@@ -14,6 +15,8 @@ class Privilege extends Common
      */
     public function index()
     {
+        $list = PrivilegeLib::getDataLists();
+        $this->assign('list',no_limit_category($list));
         return $this->fetch('privilege/index');
     }
 
@@ -24,7 +27,8 @@ class Privilege extends Common
      */
     public function create()
     {
-        $this->assign('parentPrivilege',array());
+        $list = PrivilegeLib::getDataLists();       
+        $this->assign('list',no_limit_category($list));
         return $this->fetch('privilege/create');
     }
 
@@ -36,7 +40,12 @@ class Privilege extends Common
      */
     public function save(Request $request)
     {
-        //
+        $res = PrivilegeLib::handleAdd(input('post.'));
+        if($res['code'] == lang('code_success')){
+            $this->redirect('admin/privilege/');
+        }else{
+            $this->redirect('admin/privilege/create');
+        }
     }
 
     /**
@@ -47,6 +56,9 @@ class Privilege extends Common
      */
     public function edit($id)
     {
+        $list = PrivilegeLib::getDataLists();    
+        $this->assign('list',no_limit_category($list));
+        $this->assign('data',PrivilegeLib::getInfoById($id));
         return $this->fetch('privilege/edit');
     }
 
@@ -59,7 +71,12 @@ class Privilege extends Common
      */
     public function update(Request $request, $id)
     {
-        //
+        $res = PrivilegeLib::handleUpdate(input('post.'),$id);
+        if($res['code'] == lang('code_success')){
+            $this->redirect('admin/privilege/');
+        }else{
+            $this->redirect('admin/privilege/'.$id.'/edit');
+        }
     }
 
     /**
@@ -70,6 +87,8 @@ class Privilege extends Common
      */
     public function delete($id)
     {
-        //
+        PrivilegeLib::destroyData(array('id' => $id),(new \app\common\model\Privileges));
+        \Session::flash('flash_notification_message','删除成功!');
+        $this->redirect('admin/privilege/');
     }
 }
