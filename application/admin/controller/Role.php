@@ -42,10 +42,10 @@ class Role extends Common
     public function save(Request $request)
     {
         $res = RoleLib::handleAdd(input('post.'));
-        if($res['code'] == lang('code_success')){
-            $this->redirect('admin/role/');
-        }else{
-            $this->redirect('admin/role/create');
+        if ($res['code'] == lang('code_success')) {
+            $this->redirect('/admin/role/');
+        }else {
+            $this->redirect('/admin/role/create');
         }
     }
 
@@ -75,9 +75,9 @@ class Role extends Common
     public function update(Request $request, $id)
     {
         $res = RoleLib::handleUpdate(input('post.'),$id);
-        if($res['code'] == lang('code_success')){
+        if ($res['code'] == lang('code_success')) {
             $this->redirect('/admin/role/');
-        }else{
+        } else {
             $this->redirect('/admin/role/'.$id.'/edit');
         }
     }

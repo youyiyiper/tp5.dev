@@ -19,7 +19,7 @@ class RoleLib extends CommonLib
 
 		$model = Roles::field('id,name,status,desc,created_at,updated_at');
 
-		if(!empty($get['name'])){
+		if (!empty($get['name'])) {
 			$map[] =  ['name', '=' , $get['name']];
 			$model = $model->where($map);
 		}
@@ -33,7 +33,7 @@ class RoleLib extends CommonLib
 	 */
 	public static function getOptionData($map = array())
 	{
-		if(empty($map)){
+		if (empty($map)) {
 			$map[] =  ['status', '=' , 1];
 		}		
 
@@ -49,6 +49,7 @@ class RoleLib extends CommonLib
 		if ($id > 0) {
 			$where[] = ['id','<>',$id];
 		}
+
 		$where[] = ['name','=',$name];
 		return Roles::where($where)->find();
 	}
@@ -91,7 +92,7 @@ class RoleLib extends CommonLib
 		$flag = self::addData($data,(new Roles));
 		if (!$flag) {
 			return data_format_flash(lang('code_db_insert_err'),lang('tips_add_info_err'));
-		}else{
+		} else {
 			return data_format_flash(lang('code_success'),lang('tips_add_info_suc'),'success');
 		}		
 	}
@@ -121,7 +122,7 @@ class RoleLib extends CommonLib
 		$flag = self::updateData(array('id' => $id),$data,(new Roles));
 		if (!$flag) {
 			return data_format_flash(lang('code_db_update_err'),lang('tips_update_info_err'));
-		}else{
+		} else {
 			return data_format(lang('code_success'),lang('tips_update_info_suc'));
 		}		
 	}

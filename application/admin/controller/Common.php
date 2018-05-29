@@ -28,7 +28,7 @@ class Common extends Controller
 	    // 移动到框架应用根目录/uploads/ 目录下
 	    $path = './uploads';
 	    $info = $file->validate(['ext'=>'jpg,png,gif'])->move($path);
-	    if($info){
+	    if ($info) {
 	        // 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
 	        $file_path = trim($path,'.').'/'.$info->getSaveName();
 	      	$imageSize = getimagesize('.'.$file_path);
@@ -38,7 +38,7 @@ class Common extends Controller
 	            'width'     => isset($imageSize[0]) ? $imageSize[0] : 200,
 	            'height'     => isset($imageSize[1]) ? $imageSize[1] : 200,
 	        ]);
-	    }else{
+	    } else {
 	        // 上传失败获取错误信息
 	        #echo $file->getError();
 	        return json([
@@ -69,7 +69,7 @@ class Common extends Controller
         $image->crop($imgW, $imgH)
             ->save('.'.$path . 'cropped-' . $filename);
 
-        if(!$image) {
+        if (!$image) {
             return json([
                 'status' => 'error',
                 'message' => 'Server error while uploading',

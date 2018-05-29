@@ -42,10 +42,10 @@ class Admin extends Common
     public function save(Request $request)
     {
         $res = AdminLib::handleAdd(input('post.'));
-        if($res['code'] == lang('code_success')){
-            $this->redirect('admin/admin/create');
-        }else{
-            $this->redirect('admin');
+        if ($res['code'] == lang('code_success')) {
+            $this->redirect('/admin/admin/create');
+        } else {
+            $this->redirect('/admin/admin/');
         }
     }
 
@@ -72,10 +72,10 @@ class Admin extends Common
     public function update(Request $request, $id)
     {
         $res = AdminLib::handleUpdate(input('post.'),$id);
-        if($res['code'] == lang('code_success')){
-            $this->redirect('admin/admin/'.$id.'/edit');
-        }else{
-            $this->redirect('admin/admin/');
+        if ($res['code'] == lang('code_success')) {
+            $this->redirect('/admin/admin/'.$id.'/edit');
+        } else {
+            $this->redirect('/admin/admin/');
         }
     }
 
@@ -89,6 +89,6 @@ class Admin extends Common
     {
         $flag = AdminLib::updateData(array('id' => $id),array('status' => 0));
         \Session::flash('flash_notification_message','删除成功!');
-        $this->redirect('admin/admin/');
+        $this->redirect('/admin/admin/');
     }
 }

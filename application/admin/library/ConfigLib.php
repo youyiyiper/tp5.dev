@@ -52,13 +52,13 @@ class ConfigLib extends CommonLib
         }
 
 		$data['name'] 		= $post['name'];
-		$data['content'] 		= !empty($post['content']) ? $post['content'] : '';
+		$data['content'] 	= !empty($post['content']) ? $post['content'] : '';
 		$data['title'] 		= !empty($post['title']) ? $post['title'] : '';
 		
 		$flag = self::addData($data,(new Configs));
 		if (!$flag) {
 			return data_format_flash(lang('code_db_insert_err'),lang('tips_add_info_err'));
-		}else{
+		} else {
 			return data_format_flash(lang('code_success'),lang('tips_add_info_suc'),'success');
 		}		
 	}
@@ -71,11 +71,11 @@ class ConfigLib extends CommonLib
 	 */
 	public static function handleUpdate($post,$id){
 		if (!empty($post['name'])) {
-			$data['name'] 		= $post['name'];
+			$data['name'] 	 = $post['name'];
 		}	
 		
 		if (!empty($post['content'])) {
-			$data['content'] 	= $post['content'];
+			$data['content'] = $post['content'];
 		}
 
 		if (!empty($post['title'])) {
@@ -85,8 +85,8 @@ class ConfigLib extends CommonLib
 		$flag = self::updateData(array('id' => $id),$data,(new Configs));
 		if (!$flag) {
 			return data_format_flash(lang('code_db_update_err'),lang('tips_update_info_err'));
-		}else{
-			return data_format(lang('code_success'),lang('tips_update_info_suc'));
+		} else {
+			return data_format_flash(lang('code_success'),lang('tips_update_info_suc'),'success');
 		}		
 	}
 }

@@ -81,7 +81,7 @@ class PrivilegeLib extends CommonLib
 		$flag = self::addData($data,(new Privileges));
 		if (!$flag) {
 			return data_format_flash(lang('code_db_insert_err'),lang('tips_add_info_err'));
-		}else{
+		} else {
 			return data_format(lang('code_success'),lang('tips_add_info_suc'));
 		}		
 	}
@@ -124,7 +124,7 @@ class PrivilegeLib extends CommonLib
 		$flag = self::updateData(array('id' => $id),$data,(new Privileges));
 		if (!$flag) {
 			return data_format_flash(lang('code_db_update_err'),lang('tips_update_info_err'));
-		}else{
+		} else {
 			return data_format(lang('code_success'),lang('tips_update_info_suc'));
 		}		
 	}

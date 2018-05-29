@@ -20,7 +20,7 @@ class LoginLib
 
         //检查登录
         $admin = AdminLib::getAdminInfoByEmail($post['email']);
-        if(!$admin) {
+        if (!$admin) {
             return data_format_flash(lang('code_email_not_exists'),lang('tips_email_not_exists'));
         }
         

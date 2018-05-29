@@ -48,11 +48,10 @@ class Manager extends Common
 
        	if ($res['code'] == lang('code_success')) {
        		$this->redirect('manager/logout');
-       	}else{
+       	} else {
        		$this->redirect('manager/changePwd');
        	}
     }
-
 
     /**
      * 执行退出操作

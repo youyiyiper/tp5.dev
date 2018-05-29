@@ -15,19 +15,19 @@ class AdminLib
 	public static function getDataLists($param = array())
 	{
 		$map = array();
-		if(!empty($param['name'])){
+		if (!empty($param['name'])) {
 			$map[] =  ['name', 'like', $param['name'] . '%'];
 		}		
 
-		if(!empty($param['email'])){
+		if (!empty($param['email'])){
 			$map[] =  ['email', '=' , $param['email']];
 		}	
 
-		if(isset($param['status']) && is_numeric($param['status'])){
+		if (isset($param['status']) && is_numeric($param['status'])) {
 			$map[] =  ['status', '=' , (int)$param['status']];
 		}		
 
-		if(empty($map)){
+		if (empty($map)) {
 			$map[] =  ['status', '=' , 1];
 		}
 
@@ -120,7 +120,7 @@ class AdminLib
 		$flag = self::updateData(array('id' => $adminSession['id']),$data);
 		if (!$flag) {
 			return data_format_flash(lang('code_db_update_err'),lang('tips_update_info_err'));
-		}else{
+		} else {
 			$res = self::getAdminInfoById($adminSession['id']);
 			unset($res['password']);
 			set_session('Admin',$res);
@@ -158,7 +158,7 @@ class AdminLib
 		$flag = self::updateData(array('id' => $id),$data);
 		if (!$flag) {
 			return data_format_flash(lang('code_db_update_err'),lang('tips_update_info_err'));
-		}else{
+		} else {
 			return data_format(lang('code_success'),lang('tips_update_info_suc'));
 		}		
 	}
@@ -200,7 +200,7 @@ class AdminLib
 		$flag = self::addData($data);
 		if (!$flag) {
 			return data_format_flash(lang('code_db_insert_err'),lang('tips_add_info_err'));
-		}else{
+		} else {
 			return data_format(lang('code_success'),lang('tips_add_info_suc'));
 		}		
 	}	

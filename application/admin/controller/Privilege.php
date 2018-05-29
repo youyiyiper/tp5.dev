@@ -41,10 +41,10 @@ class Privilege extends Common
     public function save(Request $request)
     {
         $res = PrivilegeLib::handleAdd(input('post.'));
-        if($res['code'] == lang('code_success')){
-            $this->redirect('admin/privilege/');
-        }else{
-            $this->redirect('admin/privilege/create');
+        if ($res['code'] == lang('code_success')) {
+            $this->redirect('/admin/privilege/');
+        } else {
+            $this->redirect('/admin/privilege/create');
         }
     }
 
@@ -72,10 +72,10 @@ class Privilege extends Common
     public function update(Request $request, $id)
     {
         $res = PrivilegeLib::handleUpdate(input('post.'),$id);
-        if($res['code'] == lang('code_success')){
-            $this->redirect('admin/privilege/');
-        }else{
-            $this->redirect('admin/privilege/'.$id.'/edit');
+        if ($res['code'] == lang('code_success')) {
+            $this->redirect('/admin/privilege/');
+        } else {
+            $this->redirect('/admin/privilege/'.$id.'/edit');
         }
     }
 
@@ -89,6 +89,6 @@ class Privilege extends Common
     {
         PrivilegeLib::destroyData(array('id' => $id),(new \app\common\model\Privileges));
         \Session::flash('flash_notification_message','删除成功!');
-        $this->redirect('admin/privilege/');
+        $this->redirect('/admin/privilege/');
     }
 }

@@ -24,7 +24,7 @@ class Login extends Controller
     {
     	if (!$request->isPost()) {
     		$this->redirect('Login/index');
-    	}else{
+    	} else {
             $res = LoginLib::handleLogin(input('post.'));
             if($res['code'] == lang('code_success')){
                 $this->redirect('Index/index');

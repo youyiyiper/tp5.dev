@@ -39,10 +39,10 @@ class Config extends Common
     public function save(Request $request)
     {
         $res = ConfigLib::handleAdd(input('post.'));
-        if($res['code'] == lang('code_success')){
+        if ($res['code'] == lang('code_success')) {
             $this->redirect('/admin/config/create');
-        }else{
-            $this->redirect('/admin/config');
+        } else {
+            $this->redirect('/admin/config/');
         }
     }
 
@@ -68,9 +68,9 @@ class Config extends Common
     public function update(Request $request, $id)
     {
         $res = ConfigLib::handleUpdate(input('post.'),$id);
-        if($res['code'] == lang('code_success')){
+        if ($res['code'] == lang('code_success')) {
             $this->redirect('/admin/config/'.$id.'/edit');
-        }else{
+        } else {
             $this->redirect('/admin/config/');
         }
     }
