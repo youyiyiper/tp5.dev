@@ -31,12 +31,16 @@ return [
 
 
 	###############################提示信息######################################
-	'tips_success_tips' 			=> '执行成功',
+	'tips_success' 					=> '执行成功',
 	'tips_error' 					=> '执行失败',
 	'tips_param_must' 				=> '参数必须',
+	'tips_valid_success' 			=> '验证成功',
 	
 	//邮箱
 	'tips_email_not_exists' 		=> '邮箱不存在',
+	'tips_email_send_success' 		=> '邮箱发送成功',
+	'tips_email_send_fail' 			=> '邮箱发送失败',
+	'tips_email_out_time' 			=> '邮箱验证过期',
 	'tips_status_no_valid' 			=> '状态不可用',
 	'tips_login_error' 				=> '帐号或密码错误',
 	'tips_email_exists' 			=> '邮箱已存在',

@@ -1,8 +1,16 @@
 <?php
 
+//后台忘记密码
+Route::get('admin/login/email', 'admin/Login/email');
+Route::post('admin/login/doEmail', 'admin/Login/doEmail');
+Route::get('admin/validEmail', 'admin/Login/validEmail');
+Route::get('admin/Login/reset', 'admin/Login/reset');
+Route::post('admin/Login/doReset', 'admin/Login/doReset');
+
 //后台登录
 Route::get('admin/login/:type', 'admin/Login/index');
 Route::post('admin/login/doLogin', 'admin/Login/doLogin');
+
 
 //后台管理员中心
 Route::get('admin/index', 'admin/Index/index');

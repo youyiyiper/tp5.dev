@@ -1,5 +1,5 @@
-@extends('admin.layouts.login')
-@section('admin-auth-page-container')
+{extend name="layouts/login" /}
+{block name="admin-auth-page-container"}
     <!-- begin brand -->
     <div class="login-header">
         <div class="brand">
@@ -12,19 +12,18 @@
     <!-- end brand -->
      
     <div class="login-content">
-        @include('layouts.flash')
-        <form action="{{ url('admin/password/email') }}" method="POST" class="margin-bottom-0">
-            {{ csrf_field() }}
+        {include file="layouts/flash" /}
+        <form action="{:url('admin/login/doEmail')}" method="POST" class="margin-bottom-0">
             <div class="form-group m-b-20">
-                <input type="text" name="email" class="form-control input-lg" placeholder="邮箱" value="{{ old('email') }}"/>
+                <input type="email" name="email" class="form-control input-lg" placeholder="邮箱" value=""/>
             </div>
 
             <div class="login-buttons">
                 <button type="submit" class="btn btn-success btn-block btn-lg">发送邮件</button>
             </div>
             <div class="m-t-20">
-                <a href="{{ url('admin/login') }}">返回登录</a>
+                <a href="{:url('admin/login')}">返回登录</a>
             </div>
         </form>
     </div>
-@endsection
+{/block}

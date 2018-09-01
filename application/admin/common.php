@@ -150,3 +150,13 @@ function get_role_title($role_id) {
 	$res = Db::name('roles')->where('id',$role_id)->field('name')->find();
 	return !empty($res['name']) ? $res['name'] : '';
 }
+
+/**
+ * 验证是否是邮箱
+ *
+ * @param unknown $address 邮箱地址
+ * @return boolean 是否是邮箱
+ */
+function is_email($address){
+    return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",$address)) ? FALSE : TRUE;
+}
