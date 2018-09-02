@@ -3,21 +3,23 @@ namespace app\admin\controller;
 
 use app\admin\controller\Common;
 
-//文章
+/**
+ * 文章
+ */
 class Article extends Common
 {
     public function index()
     {
-       	return $this->fetch('article/index');
+        return $this->fetch('article/index');
     }
 
-	public function create()
+    public function create()
     {
-       	return $this->fetch('article/create');
+        return $this->fetch('article/create');
     }    
 
-	public function edit()
+    public function edit()
     {
-       	return $this->fetch('article/edit');
+        return $this->fetch('article/edit');
     }    
 }

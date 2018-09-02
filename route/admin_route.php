@@ -6,7 +6,6 @@ Route::post('admin/login/doEmail', 'admin/Login/doEmail');
 Route::get('admin/validEmail', 'admin/Login/validEmail');
 Route::get('admin/Login/reset', 'admin/Login/reset');
 Route::post('admin/Login/doReset', 'admin/Login/doReset');
-
 //后台登录
 Route::get('admin/login/:type', 'admin/Login/index');
 Route::post('admin/login/doLogin', 'admin/Login/doLogin');
@@ -16,10 +15,10 @@ Route::post('admin/login/doLogin', 'admin/Login/doLogin');
 Route::get('admin/index', 'admin/Index/index');
 Route::get('admin/manager', 'admin/Manager/setting');
 Route::post('admin/saveHeadimg', 'admin/Manager/saveHeadimg');
-
+//头像上传
 Route::post('common/upload', 'admin/Common/upload');
 Route::post('common/handle', 'admin/Common/handle');
-
+//修改密码
 Route::get('admin/changePwd', 'admin/Manager/changePwd');
 Route::post('admin/postChangePwd','admin/Manager/postChangePwd');
 Route::get('admin/logout','admin/Manager/logout');
@@ -29,3 +28,4 @@ Route::resource('admin/admin','admin/Admin');
 Route::resource('admin/role','admin/Role');
 Route::resource('admin/privilege','admin/Privilege');
 Route::resource('admin/config','admin/Config');
+Route::resource('admin/article','admin/Article');
